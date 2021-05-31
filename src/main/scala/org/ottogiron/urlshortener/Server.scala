@@ -1,5 +1,4 @@
-package com.jumlabs.urlshortener
-
+package org.ottogiron.urlshortener
 
 import cats.effect._
 import infrastructure.endpoint.UrlEndpoints

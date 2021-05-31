@@ -21,6 +21,7 @@ val ScalaTestVersion = "3.2.9"
 val ScalaTestPlusVersion = "3.2.2.0"
 val FlywayVersion = "7.9.1"
 val TsecVersion = "0.2.1"
+val ScalaMockVersion = "5.1.0"
 
 libraryDependencies ++= Seq(
   "org.typelevel" %% "cats-core" % CatsVersion,
@@ -44,6 +45,7 @@ libraryDependencies ++= Seq(
   "org.scalacheck" %% "scalacheck" % ScalaCheckVersion % Test,
   "org.scalatest" %% "scalatest" % ScalaTestVersion % Test,
   "org.scalatestplus" %% "scalacheck-1-14" % ScalaTestPlusVersion % Test,
+  "org.scalamock" %% "scalamock" % ScalaMockVersion % Test,
   // Authentication dependencies
   "io.github.jmcardon" %% "tsec-common" % TsecVersion,
   "io.github.jmcardon" %% "tsec-password" % TsecVersion,

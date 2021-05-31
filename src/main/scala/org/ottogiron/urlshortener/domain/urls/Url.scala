@@ -1,5 +1,4 @@
-package com.jumlabs.urlshortener.domain
-package urls
+package org.ottogiron.urlshortener.domain.urls
 
 import java.time.Instant
 
