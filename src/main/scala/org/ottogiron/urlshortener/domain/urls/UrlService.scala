@@ -28,3 +28,9 @@ class UrlService[F[_]](urlRepository:UrlRepositoryAlgebra[F]) {
   }
 
 }
+
+object UrlService{
+
+  def apply[F[_]](urlRepository:UrlRepositoryAlgebra[F]): UrlService[F] =
+    new UrlService[F](urlRepository)
+}

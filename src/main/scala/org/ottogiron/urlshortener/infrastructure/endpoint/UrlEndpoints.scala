@@ -3,6 +3,7 @@ package org.ottogiron.urlshortener.infrastructure.endpoint
 import cats.effect.Sync
 import cats.syntax.all._
 import io.circe.generic.auto._
+import org.ottogiron.urlshortener.domain.urls.UrlService
 //import io.circe.syntax._
 import org.http4s._
 import org.http4s.circe._
@@ -11,7 +12,7 @@ import org.ottogiron.urlshortener.domain.urls.Url
 
 
 
-class UrlEndpoints[F[_]:Sync] extends Http4sDsl[F]{
+class UrlEndpoints[F[_]:Sync](urlService: UrlService[F]) extends Http4sDsl[F]{
   implicit val urlDecoder:EntityDecoder[F, Url] = jsonOf
 
   private def urlEndpoint():HttpRoutes[F] =
@@ -34,5 +35,6 @@ class UrlEndpoints[F[_]:Sync] extends Http4sDsl[F]{
 }
 
 object UrlEndpoints {
-  def apply[F[_]:Sync]:HttpRoutes[F] = new UrlEndpoints[F].endpoints()
+  def apply[F[_]:Sync](urlService: UrlService[F]):HttpRoutes[F] =
+    new UrlEndpoints[F](urlService).endpoints()
 }

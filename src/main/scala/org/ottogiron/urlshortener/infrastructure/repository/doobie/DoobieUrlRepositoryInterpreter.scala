@@ -52,3 +52,8 @@ class DoobieUrlRepositoryInterpreter[F[_]: Bracket[*[_], Throwable]](val xa:Tran
       .value
 }
 
+object DoobieUrlRepositoryInterpreter{
+
+ def apply[F[_]: Bracket[*[_], Throwable]]( xa:Transactor[F]): DoobieUrlRepositoryInterpreter[F] =
+   new DoobieUrlRepositoryInterpreter[F](xa)
+}
