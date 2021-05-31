@@ -6,7 +6,7 @@ import cats.effect.Bracket
 import cats.syntax.all._
 import doobie._
 import doobie.implicits._
-// import doobie.implicits.legacy.instant._
+import doobie.implicits.legacy.instant._
 import domain.urls.{Url, UrlRepositoryAlgebra}
 
 private object UrlSQL {
