@@ -1,4 +1,5 @@
-package org.ottogiron.urlshortener.domain.urls
+package org.ottogiron.urlshortener
+package domain.urls
 
 import org.ottogiron.urlshortener.util.Shortener
 

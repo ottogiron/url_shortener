@@ -16,7 +16,7 @@ class UrlEndpoints[F[_]:Sync] extends Http4sDsl[F]{
 
   private def urlEndpoint():HttpRoutes[F] =
     HttpRoutes.of[F]{case _ @ GET -> Root  =>
-      Sync[F].delay(Response(Status.Ok))
+      Sync[F].pure(Response(Status.Ok))
     }
 
   private def urlJson(): HttpRoutes[F] =
