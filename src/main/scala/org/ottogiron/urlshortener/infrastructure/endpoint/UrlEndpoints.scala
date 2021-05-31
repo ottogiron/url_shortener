@@ -23,7 +23,7 @@ class UrlEndpoints[F[_]:Sync](urlService: UrlService[F]) extends Http4sDsl[F]{
   private def urlJson(): HttpRoutes[F] =
     HttpRoutes.of[F]{case _ @ GET -> Root / "json1" =>
       // Ok(Url("www.jumlabs.com").asJson)
-      Ok("")
+      Ok(urlService.hash(1, "www.google.com"))
     }
 
 //  private def shorten(): HttpRoutes[F]=
