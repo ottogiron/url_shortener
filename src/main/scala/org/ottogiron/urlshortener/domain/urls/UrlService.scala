@@ -13,7 +13,7 @@ import java.time.Instant
 class UrlService[F[_]](urlRepository:UrlRepositoryAlgebra[F]) {
 
   def hash(userId: Int, url: String): String = {
-    Shortener.shorten((userId + url).getBytes())
+    Shortener.shorten((s"$userId$url").getBytes())
   }
 
   def shorten(userId:Int, url:String, now:Instant = Instant.now()): F[Url] = {

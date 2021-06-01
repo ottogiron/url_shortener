@@ -1,6 +1,7 @@
 organization := "com.jumlabs"
 name := "url-shortener"
 version := "0.0.1-SNAPSHOT"
+scalaVersion := "2.13.6"
 crossScalaVersions := Seq("2.12.13", "2.13.6")
 
 resolvers += Resolver.sonatypeRepo("snapshots")
