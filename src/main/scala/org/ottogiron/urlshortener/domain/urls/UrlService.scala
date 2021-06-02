@@ -12,11 +12,11 @@ import java.time.Instant
 
 class UrlService[F[_]](urlRepository:UrlRepositoryAlgebra[F]) {
 
-  def hash(userId: Int, url: String): String = {
+  def hash(userId: Long, url: String): String = {
     Shortener.shorten((s"$userId$url").getBytes())
   }
 
-  def shorten(userId:Int, url:String, now:Instant = Instant.now()): F[Url] = {
+  def shorten(userId:Long, url:String, now:Instant = Instant.now()): F[Url] = {
     val shortened:String = hash(userId, url)    
     urlRepository.create(Url(
       hash = shortened,

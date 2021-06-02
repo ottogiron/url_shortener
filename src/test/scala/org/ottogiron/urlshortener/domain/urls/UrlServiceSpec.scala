@@ -17,7 +17,7 @@ class UrlServiceSpec extends AnyFlatSpec with MockFactory with should.Matchers {
     val mockRepository = mock[UrlRepositoryAlgebra[IO]]
     val now = Instant.now()
     val urlVal = "www.google.com"
-    val userId = 1
+    val userId:Long = 1
     val hash = Shortener.shorten( s"$userId$urlVal".getBytes())
 
     val url = Url(

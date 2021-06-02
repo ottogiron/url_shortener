@@ -28,7 +28,7 @@ object Server extends IOApp {
       urlRepo = DoobieUrlRepositoryInterpreter(xa)
       urlService = UrlService(urlRepo)
       httpApp = Router(
-        "/urls" -> UrlEndpoints[F](urlService)
+        "/urls" -> UrlEndpoints.endpoints(urlService)
       ).orNotFound
       server <- BlazeServerBuilder[F](serverEc)
         .bindHttp(8080)

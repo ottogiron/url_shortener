@@ -4,16 +4,15 @@ import cats.effect.Sync
 import cats.syntax.all._
 import io.circe.generic.auto._
 import org.ottogiron.urlshortener.domain.urls.UrlService
-//import io.circe.syntax._
+import io.circe.syntax._
 import org.http4s._
 import org.http4s.circe._
 import org.http4s.dsl.Http4sDsl
-import org.ottogiron.urlshortener.domain.urls.Url
 
 
 
 class UrlEndpoints[F[_]:Sync](urlService: UrlService[F]) extends Http4sDsl[F]{
-  implicit val urlDecoder:EntityDecoder[F, Url] = jsonOf
+  implicit val urlReqDecoder:EntityDecoder[F, UrlRequest] = jsonOf
 
   private def urlEndpoint():HttpRoutes[F] =
     HttpRoutes.of[F]{case _ @ GET -> Root  =>
@@ -26,15 +25,26 @@ class UrlEndpoints[F[_]:Sync](urlService: UrlService[F]) extends Http4sDsl[F]{
       Ok(urlService.hash(1, "www.google.com"))
     }
 
-//  private def shorten(): HttpRoutes[F]=
+  private def shortenUrl(urlService: UrlService[F]): HttpRoutes[F] =
+    HttpRoutes.of[F]{
+      case req @ POST -> Root / "shorten" =>
+        for {
+          urlRequest <- req.as[UrlRequest]
+          saved <- urlService.shorten(urlRequest.id, urlRequest.url)
+          resp <- Ok(saved.asJson)
+        } yield resp
+    }
+
+  //  private def shorten(): HttpRoutes[F]=
 //    HttpRoutes.of[F]{case _ @ POST -> Root / "shorten" =>
 //      Ok(Url("www.jumlabs.com"))
 //    }
 
-  def endpoints():HttpRoutes[F] =  urlEndpoint() <+> urlJson()
+  def endpoints():HttpRoutes[F] =  urlEndpoint() <+> urlJson() <+> shortenUrl(urlService)
 }
 
 object UrlEndpoints {
-  def apply[F[_]:Sync](urlService: UrlService[F]):HttpRoutes[F] =
+  def endpoints[F[_]:Sync](urlService: UrlService[F]):HttpRoutes[F] =
     new UrlEndpoints[F](urlService).endpoints()
 }
+
