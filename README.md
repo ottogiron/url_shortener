@@ -1,6 +1,6 @@
 # URL Shortener (WIP)
 
-Simple URL shortener implemented with scala and Cats. This project is not meant for production use. 
+Simple URL shortener implemented with [Scala](https://www.scala-lang.org/) and [Cats](https://typelevel.org/cats/). This project is not meant for production use. 
 The project is being used for educational content I'm creating.
 
 ## Tools and Libraries
